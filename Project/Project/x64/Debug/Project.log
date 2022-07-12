@@ -1,4 +1,6 @@
-﻿  Main.cpp
-D:\Nik\Coding\7KreamIT\Current\Project\Project\Main.cpp(361,10): warning C4156: удаление массива без использования формы оператора "delete", предусмотренной для массива; подставлена предусмотренная форма оператора
-D:\Nik\Coding\7KreamIT\Current\Project\Project\Main.cpp(361,10): warning C4154: удаление массива; выполнено преобразование к указателю
-  Project.vcxproj -> D:\Nik\Coding\7KreamIT\Current\Project\x64\Debug\Project.exe
+﻿  Functions.cpp
+  Main.cpp
+D:\Nik\Coding\7KreamIT\TryingToFriendWithGitHub\Project\Project\Main.cpp(363,10): warning C4156: удаление массива без использования формы оператора "delete", предусмотренной для массива; подставлена предусмотренная форма оператора
+D:\Nik\Coding\7KreamIT\TryingToFriendWithGitHub\Project\Project\Main.cpp(363,10): warning C4154: удаление массива; выполнено преобразование к указателю
+  Создание кода...
+  Project.vcxproj -> D:\Nik\Coding\7KreamIT\TryingToFriendWithGitHub\Project\x64\Debug\Project.exe

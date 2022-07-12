@@ -284,43 +284,61 @@ int main()
 	}
 
 	//опрос времени:
-	int qWhen = 17; //вопрос: Когда?
-	int aWhen = 0;  //ответ: Когда?
+	int qWhen = 17;      //вопрос: Когда?
+	int aWhen = 0;		 //ответ: Когда?
+	int aWhenDay = 0;    //ответ: Когда?
+	int aWhenMonth = 0;  //ответ: Когда?
+	int aWhenYear = 0;   //ответ: Когда?
 	while (qWhen == 17)
 	{
 		cout << "Когда сделано ТО?" << endl;
-		cout << "0 - Назад" << endl;
+		//cout << "0 - Назад" << endl;
 		cout << "1 - Сегодня" << endl;
-		cout << "2 - Вчера" << endl;
-		cout << "3 - Позавчера" << endl;
-		cout << "4 - Ввести дату" << endl; //доп ветка
+		//cout << "2 - Вчера" << endl;		//для реализации этой функции нужно будет написать библиотеку для календаря
+		//cout << "3 - Позавчера" << endl;  //**
+		cout << "2 - Ввести дату" << endl; //доп ветка
 		cin >> qWhen;
 		switch (qWhen)
 		{
 		case 0:
-			qWhen = 17; //костыль
-			//придумать алгоритм возврата к предыдущему разделу
+			qWhen = 17; //Временное
 			break;
 		case 1:
-			cout << t.wDay << endl;
-			cout << t.wMonth << endl;
-			cout << t.wYear << endl;
+			aWhenDay = t.wDay;
+			aWhenMonth = t.wMonth;
+			aWhenYear = t.wYear;
 			//cout << t.wHour << endl;   //а ещё можно часы
 			//cout << t.wMinute << endl; //а ещё можно минуты
 			//cout << t.wSecond << endl; //а ещё можно секунды
-			//************************************КОНЕЦ********************************
 			break;
 		case 2:
-			aWhen;
+			i = 1;
+			while (i == 1)
+			{
+				system("cls");
+				cout << "Дата Тех. обслуживания(ДДММГГ):" << endl;
+				cin >> aWhen;
+				if (aWhen < 100000)
+				{
+					cout << "Введите дату с левыми нулями, пожалуйста! \n Например, так: 010722";
+
+				}
+				else
+				{
+					cout << aWhen;
+					i = 0;
+				}
+				//***КОНЕЦ***
+			}
 			break;
 		case 3:
-			aWhen;
+			qWhen = 17; //Временное
 			break;
 		case 4:
-			aWhen;
+			qWhen = 17; //Временное
 			break;
 		default:
-			qWhen = 17;
+			qWhen = 17; //Временное
 			break;
 		}
 	}
