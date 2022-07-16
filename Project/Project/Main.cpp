@@ -18,8 +18,8 @@ int main()
 	SYSTEMTIME t;	  //для времени
 	GetLocalTime(&t); //для времени
 	setlocale(LC_ALL, "Russian"); //поддержка Русского языка
-	SetConsoleCP(1251);           //поддержка Русского языка
-	SetConsoleOutputCP(1251);     //поддержка Русского языка
+	SetConsoleCP(1251);           //..
+	SetConsoleOutputCP(1251);     //..
 	int i, j; //переменные циклов
 
 	ifstream fin("FileSourse.csv"); //открытие файла
@@ -283,13 +283,23 @@ int main()
 		}
 	}
 
-
 	//формирование динамического массива с номерами гаджетов, подходящих описанию:
+	int* chosenGadget = new int[n] {0}; // При объявлении сразу зануляем всю матрицу
+	j = 0;
 	for (i = 0; i < n; i++)
-	{
+		if ((A[i].model[0] == aWhat[0]) && (A[i].model[1] == aWhat[1]) && (A[i].place == aWhere))
+		{
+			chosenGadget[j] = stoi(A[i].number);
+			j++;
+		}
+	int chosenGadgetN = j; //сохраняем количество выбраных
 
+	/* проверка:
+	for (i = 0; i < j; i++)
+	{
+		cout << winGadget[i] << endl;
 	}
-	
+	*/
 
 	//опрос времени:
 	int qWhen = 17;      //вопрос: Когда?
@@ -302,8 +312,8 @@ int main()
 		cout << "Когда сделано ТО?" << endl;
 		//cout << "0 - Назад" << endl;
 		cout << "1 - Сегодня" << endl;
-		//cout << "2 - Вчера" << endl;	   //для реализации этой функции нужно будет написать библиотеку для календаря
-		//cout << "3 - Позавчера" << endl; //**
+		//cout << "2 - Вчера" << endl;	   //для реализации этой функции нужно будет написать календарь
+		//cout << "3 - Позавчера" << endl; //..
 		cout << "2 - Ввести дату" << endl; //доп ветка
 		cin >> qWhen;
 		switch (qWhen)
@@ -383,7 +393,8 @@ int main()
 	fWrite.close(); //закрытие файла
 
 	cout << "Конец программы. Для выхода нажмите Enter" << endl;
-	_getch();
+	char closeProgramm = getchar(); //выход с проги через Enter
+	if (closeProgramm == '\n');		//..
 	delete A; //деструктор
 	return (0);
 }
