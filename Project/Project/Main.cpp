@@ -23,48 +23,48 @@ int main()
 	int i, j; //переменные циклов
 
 	ifstream fin("FileSourse.csv"); //открытие файла
-	string objectString[n]; //массив строчек каждого устройства
+	string gadgetString[n]; //массив строчек каждого устройства
 	// int lengthString[n]{}; //массив с длинами строчек
 	for (i = 0; i < n; i++)
 	{
-		getline(fin, objectString[i]); //читает строку
-		//lengthString[i] = objectString[i].length(); //вычисл€ет кол-во символов в строке (мб и пригодитс€)
+		getline(fin, gadgetString[i]); //читает строку
+		//lengthString[i] = gadgetString[i].length(); //вычисл€ет кол-во символов в строке (мб и пригодитс€)
 	}
 	fin.close(); //закрытие файла
 
 	//заполнение структуры:	
-	object A[n];
+	gadget A[n];
 	for (i = 0; i < n; i++) //нулева€ строка это заголовки
 	{
 		j = 0;
-		while (objectString[i][j] != ';')  A[i].number		 += objectString[i][j++]; j++; //01
-		while (objectString[i][j] != ';')  A[i].model		 += objectString[i][j++]; j++; //02
-		while (objectString[i][j] != ';')  A[i].place		 += objectString[i][j++]; j++; //03
-		while (objectString[i][j] != ';')  A[i].oil			 += objectString[i][j++]; j++; //04
-		while (objectString[i][j] != ';')  A[i].tools		 += objectString[i][j++]; j++; //05
-		while (objectString[i][j] != ';')  A[i].password	 += objectString[i][j++]; j++; //06
-		while (objectString[i][j] != ';')  A[i].qtAF		 += objectString[i][j++]; j++; //07
-		while (objectString[i][j] != ';')  A[i].qtOF		 += objectString[i][j++]; j++; //08
-		while (objectString[i][j] != ';')  A[i].qtOS		 += objectString[i][j++]; j++; //09
-		while (objectString[i][j] != ';')  A[i].qtBelt		 += objectString[i][j++]; j++; //10
-		while (objectString[i][j] != ';')  A[i].info		 += objectString[i][j++]; j++; //11
-		while (objectString[i][j] != ';')  A[i].lastDateTO	 += objectString[i][j++]; j++; //12
-		while (objectString[i][j] != ';')  A[i].lastHoursTO	 += objectString[i][j++]; j++; //13
-		while (objectString[i][j] != ';')  A[i].owner		 += objectString[i][j++]; j++; //14
-		while (objectString[i][j] != ';')  A[i].serialNumber += objectString[i][j++]; j++; //15
-		while (objectString[i][j] != ';')  A[i].AF1			 += objectString[i][j++]; j++; //16
-		while (objectString[i][j] != ';')  A[i].AF2			 += objectString[i][j++]; j++; //17
-		while (objectString[i][j] != ';')  A[i].AF3			 += objectString[i][j++]; j++; //18
-		while (objectString[i][j] != ';')  A[i].OF1			 += objectString[i][j++]; j++; //19
-		while (objectString[i][j] != ';')  A[i].OF2			 += objectString[i][j++]; j++; //20
-		while (objectString[i][j] != ';')  A[i].OF3			 += objectString[i][j++]; j++; //21
-		while (objectString[i][j] != ';')  A[i].OS1			 += objectString[i][j++]; j++; //22
-		while (objectString[i][j] != ';')  A[i].OS2			 += objectString[i][j++]; j++; //23
-		while (objectString[i][j] != ';')  A[i].OS3			 += objectString[i][j++]; j++; //24
-		while (objectString[i][j] != ';')  A[i].Belt1		 += objectString[i][j++]; j++; //25
-		while (objectString[i][j] != ';')  A[i].Belt2		 += objectString[i][j++]; j++; //26
-		while (objectString[i][j] != ';')  A[i].Belt3		 += objectString[i][j++]; j++; //27
-										   A[i].SHD		     += objectString[i][j];        //28
+		while (gadgetString[i][j] != ';')  A[i].number		 += gadgetString[i][j++]; j++; //01
+		while (gadgetString[i][j] != ';')  A[i].model		 += gadgetString[i][j++]; j++; //02
+		while (gadgetString[i][j] != ';')  A[i].place		 += gadgetString[i][j++]; j++; //03
+		while (gadgetString[i][j] != ';')  A[i].oil			 += gadgetString[i][j++]; j++; //04
+		while (gadgetString[i][j] != ';')  A[i].tools		 += gadgetString[i][j++]; j++; //05
+		while (gadgetString[i][j] != ';')  A[i].password	 += gadgetString[i][j++]; j++; //06
+		while (gadgetString[i][j] != ';')  A[i].qtAF		 += gadgetString[i][j++]; j++; //07
+		while (gadgetString[i][j] != ';')  A[i].qtOF		 += gadgetString[i][j++]; j++; //08
+		while (gadgetString[i][j] != ';')  A[i].qtOS		 += gadgetString[i][j++]; j++; //09
+		while (gadgetString[i][j] != ';')  A[i].qtBelt		 += gadgetString[i][j++]; j++; //10
+		while (gadgetString[i][j] != ';')  A[i].info		 += gadgetString[i][j++]; j++; //11
+		while (gadgetString[i][j] != ';')  A[i].lastDateTO	 += gadgetString[i][j++]; j++; //12
+		while (gadgetString[i][j] != ';')  A[i].lastHoursTO	 += gadgetString[i][j++]; j++; //13
+		while (gadgetString[i][j] != ';')  A[i].owner		 += gadgetString[i][j++]; j++; //14
+		while (gadgetString[i][j] != ';')  A[i].serialNumber += gadgetString[i][j++]; j++; //15
+		while (gadgetString[i][j] != ';')  A[i].AF1			 += gadgetString[i][j++]; j++; //16
+		while (gadgetString[i][j] != ';')  A[i].AF2			 += gadgetString[i][j++]; j++; //17
+		while (gadgetString[i][j] != ';')  A[i].AF3			 += gadgetString[i][j++]; j++; //18
+		while (gadgetString[i][j] != ';')  A[i].OF1			 += gadgetString[i][j++]; j++; //19
+		while (gadgetString[i][j] != ';')  A[i].OF2			 += gadgetString[i][j++]; j++; //20
+		while (gadgetString[i][j] != ';')  A[i].OF3			 += gadgetString[i][j++]; j++; //21
+		while (gadgetString[i][j] != ';')  A[i].OS1			 += gadgetString[i][j++]; j++; //22
+		while (gadgetString[i][j] != ';')  A[i].OS2			 += gadgetString[i][j++]; j++; //23
+		while (gadgetString[i][j] != ';')  A[i].OS3			 += gadgetString[i][j++]; j++; //24
+		while (gadgetString[i][j] != ';')  A[i].Belt1		 += gadgetString[i][j++]; j++; //25
+		while (gadgetString[i][j] != ';')  A[i].Belt2		 += gadgetString[i][j++]; j++; //26
+		while (gadgetString[i][j] != ';')  A[i].Belt3		 += gadgetString[i][j++]; j++; //27
+										   A[i].SHD		     += gadgetString[i][j];        //28
 	}
 
 	//опрос „то и √де: 
@@ -282,6 +282,7 @@ int main()
 			cout << "¬ыбрано:'" << aWhat << "' на '" << aWhere << "' " << endl;
 		}
 	}
+
 
 	//формирование динамического массива с номерами гаджетов, подход€щих описанию:
 	for (i = 0; i < n; i++)

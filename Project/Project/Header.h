@@ -2,10 +2,10 @@
 using namespace std;
 
 //структура с данными об устройстве:
-class object
+class gadget
 {
 public:
-	~object(){}; //деструктор
+	~gadget(){}; //деструктор
 	string number; //порядковый номер установки
 	string model; //название модели
 	string place;    //похожие
