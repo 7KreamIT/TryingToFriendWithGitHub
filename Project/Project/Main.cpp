@@ -10,7 +10,7 @@
 #include <ctime>		 //для вывода времени
 using namespace std;
 const int n = 87; //кол-во строк (i - переменная цикла)
-const int m = 28; //кол-во столбцов (j - переменная цикла)
+const int m = 29; //кол-во столбцов (j - переменная цикла)
 
 int main()
 {
@@ -38,33 +38,34 @@ int main()
 	{
 		j = 0;
 		while (gadgetString[i][j] != ';')  A[i].number		 += gadgetString[i][j++]; j++; //01
-		while (gadgetString[i][j] != ';')  A[i].model		 += gadgetString[i][j++]; j++; //02
-		while (gadgetString[i][j] != ';')  A[i].place		 += gadgetString[i][j++]; j++; //03
-		while (gadgetString[i][j] != ';')  A[i].oil			 += gadgetString[i][j++]; j++; //04
-		while (gadgetString[i][j] != ';')  A[i].tools		 += gadgetString[i][j++]; j++; //05
-		while (gadgetString[i][j] != ';')  A[i].password	 += gadgetString[i][j++]; j++; //06
-		while (gadgetString[i][j] != ';')  A[i].qtAF		 += gadgetString[i][j++]; j++; //07
-		while (gadgetString[i][j] != ';')  A[i].qtOF		 += gadgetString[i][j++]; j++; //08
-		while (gadgetString[i][j] != ';')  A[i].qtOS		 += gadgetString[i][j++]; j++; //09
-		while (gadgetString[i][j] != ';')  A[i].qtBelt		 += gadgetString[i][j++]; j++; //10
-		while (gadgetString[i][j] != ';')  A[i].info		 += gadgetString[i][j++]; j++; //11
-		while (gadgetString[i][j] != ';')  A[i].lastDateTO	 += gadgetString[i][j++]; j++; //12
-		while (gadgetString[i][j] != ';')  A[i].lastHoursTO	 += gadgetString[i][j++]; j++; //13
-		while (gadgetString[i][j] != ';')  A[i].owner		 += gadgetString[i][j++]; j++; //14
-		while (gadgetString[i][j] != ';')  A[i].serialNumber += gadgetString[i][j++]; j++; //15
-		while (gadgetString[i][j] != ';')  A[i].AF1			 += gadgetString[i][j++]; j++; //16
-		while (gadgetString[i][j] != ';')  A[i].AF2			 += gadgetString[i][j++]; j++; //17
-		while (gadgetString[i][j] != ';')  A[i].AF3			 += gadgetString[i][j++]; j++; //18
-		while (gadgetString[i][j] != ';')  A[i].OF1			 += gadgetString[i][j++]; j++; //19
-		while (gadgetString[i][j] != ';')  A[i].OF2			 += gadgetString[i][j++]; j++; //20
-		while (gadgetString[i][j] != ';')  A[i].OF3			 += gadgetString[i][j++]; j++; //21
-		while (gadgetString[i][j] != ';')  A[i].OS1			 += gadgetString[i][j++]; j++; //22
-		while (gadgetString[i][j] != ';')  A[i].OS2			 += gadgetString[i][j++]; j++; //23
-		while (gadgetString[i][j] != ';')  A[i].OS3			 += gadgetString[i][j++]; j++; //24
-		while (gadgetString[i][j] != ';')  A[i].Belt1		 += gadgetString[i][j++]; j++; //25
-		while (gadgetString[i][j] != ';')  A[i].Belt2		 += gadgetString[i][j++]; j++; //26
-		while (gadgetString[i][j] != ';')  A[i].Belt3		 += gadgetString[i][j++]; j++; //27
-										   A[i].SHD		     += gadgetString[i][j];        //28
+		while (gadgetString[i][j] != ';')  A[i].type		 += gadgetString[i][j++]; j++; //02
+		while (gadgetString[i][j] != ';')  A[i].model		 += gadgetString[i][j++]; j++; //03
+		while (gadgetString[i][j] != ';')  A[i].place		 += gadgetString[i][j++]; j++; //04
+		while (gadgetString[i][j] != ';')  A[i].oil			 += gadgetString[i][j++]; j++; //05
+		while (gadgetString[i][j] != ';')  A[i].tools		 += gadgetString[i][j++]; j++; //06
+		while (gadgetString[i][j] != ';')  A[i].password	 += gadgetString[i][j++]; j++; //07
+		while (gadgetString[i][j] != ';')  A[i].qtAF		 += gadgetString[i][j++]; j++; //08
+		while (gadgetString[i][j] != ';')  A[i].qtOF		 += gadgetString[i][j++]; j++; //09
+		while (gadgetString[i][j] != ';')  A[i].qtOS		 += gadgetString[i][j++]; j++; //10
+		while (gadgetString[i][j] != ';')  A[i].qtBelt		 += gadgetString[i][j++]; j++; //11
+		while (gadgetString[i][j] != ';')  A[i].info		 += gadgetString[i][j++]; j++; //12
+		while (gadgetString[i][j] != ';')  A[i].lastDateTO	 += gadgetString[i][j++]; j++; //13
+		while (gadgetString[i][j] != ';')  A[i].lastHoursTO	 += gadgetString[i][j++]; j++; //14
+		while (gadgetString[i][j] != ';')  A[i].owner		 += gadgetString[i][j++]; j++; //15
+		while (gadgetString[i][j] != ';')  A[i].serialNumber += gadgetString[i][j++]; j++; //16
+		while (gadgetString[i][j] != ';')  A[i].AF1			 += gadgetString[i][j++]; j++; //17
+		while (gadgetString[i][j] != ';')  A[i].AF2			 += gadgetString[i][j++]; j++; //18
+		while (gadgetString[i][j] != ';')  A[i].AF3			 += gadgetString[i][j++]; j++; //19
+		while (gadgetString[i][j] != ';')  A[i].OF1			 += gadgetString[i][j++]; j++; //20
+		while (gadgetString[i][j] != ';')  A[i].OF2			 += gadgetString[i][j++]; j++; //21
+		while (gadgetString[i][j] != ';')  A[i].OF3			 += gadgetString[i][j++]; j++; //22
+		while (gadgetString[i][j] != ';')  A[i].OS1			 += gadgetString[i][j++]; j++; //23
+		while (gadgetString[i][j] != ';')  A[i].OS2			 += gadgetString[i][j++]; j++; //24
+		while (gadgetString[i][j] != ';')  A[i].OS3			 += gadgetString[i][j++]; j++; //25
+		while (gadgetString[i][j] != ';')  A[i].Belt1		 += gadgetString[i][j++]; j++; //26
+		while (gadgetString[i][j] != ';')  A[i].Belt2		 += gadgetString[i][j++]; j++; //27
+		while (gadgetString[i][j] != ';')  A[i].Belt3		 += gadgetString[i][j++]; j++; //28
+										   A[i].SHD		     += gadgetString[i][j];        //29 
 	}
 
 	//опрос Что и Где: 
@@ -287,21 +288,40 @@ int main()
 	int* chosenGadget = new int[n] {0}; // При объявлении сразу зануляем всю матрицу
 	j = 0;
 	for (i = 0; i < n; i++)
-		if ((A[i].model[0] == aWhat[0]) && (A[i].model[1] == aWhat[1]) && (A[i].place == aWhere))
+		if ((A[i].type== aWhat) && (A[i].place == aWhere))
 		{
 			chosenGadget[j] = stoi(A[i].number);
 			j++;
 		}
-	int chosenGadgetN = j; //сохраняем количество выбраных
+	int chosenGadgetN = j + 1; //сохраняем количество выбраных
+	for (i = 0; i < j; i++) cout << chosenGadget[i] << endl; //проверка	
+	cout << chosenGadgetN;
 
-	/* проверка:
-	for (i = 0; i < j; i++)
+	//окончательный выбор редактируемого гаджета:
+	cout << endl;
+	for (i = 0; i < chosenGadgetN; i++)
 	{
-		cout << winGadget[i] << endl;
+		cout << "Машина " << i + 1 << ":" << A[chosenGadget[i]].model << endl;
 	}
+	/*
+	bool uncorrectAnswer;
+	int lastChosenGadget;
+	do
+	{
+		uncorrectAnswer = 0;
+		cin >> lastChosenGadget;
+		if (lastChosenGadget > i)
+		{
+			uncorrectAnswer = 1;
+			cout << "Введите пожалуйста число от 1 до" << chosenGadgetN;
+		}
+	} while (uncorrectAnswer = 1);
 	*/
 
+
+
 	//опрос времени:
+	/*
 	int qWhen = 17;      //вопрос: Когда?
 	int aWhen = 0;		 //ответ: Когда?
 	int aWhenDay = 0;    //ответ: Когда?
@@ -355,6 +375,7 @@ int main()
 			break;
 		}
 	}
+	*/
 
 	//вывод в файл:
 	ofstream fWrite("FileOut.csv"); //объявим вывод в файл csv
@@ -391,10 +412,13 @@ int main()
 		fWrite << endl;
 	}
 	fWrite.close(); //закрытие файла
-
+	
+	/* выход из проги не работает:
 	cout << "Конец программы. Для выхода нажмите Enter" << endl;
 	char closeProgramm = getchar(); //выход с проги через Enter
 	if (closeProgramm == '\n');		//..
 	delete A; //деструктор
+	*/
+
 	return (0);
 }
