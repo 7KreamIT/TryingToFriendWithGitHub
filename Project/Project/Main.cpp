@@ -24,7 +24,7 @@ int main()
 
 	ifstream fin("FileSourse.csv"); //открытие файла
 	string gadgetString[n]; //массив строчек каждого устройства
-	// int lengthString[n]{}; //массив с длинами строчек
+	//int lengthString[n]{}; //массив с длинами строчек
 	for (i = 0; i < n; i++)
 	{
 		getline(fin, gadgetString[i]); //читает строку
@@ -280,45 +280,49 @@ int main()
 		if (qWhat != 17) //вывод результатов опроса
 		{
 			system("cls");
-			cout << "Выбрано:'" << aWhat << "' на '" << aWhere << "' " << endl;
+			cout << "Выбрано:'" << aWhat << "' на '" << aWhere << "'" << endl;
 		}
 	}
 
 	//формирование динамического массива с номерами гаджетов, подходящих описанию:
 	int* chosenGadget = new int[n] {0}; // При объявлении сразу зануляем всю матрицу
+	int chosenGadgetN = 0; //количество выбраных
 	j = 0;
 	for (i = 0; i < n; i++)
-		if ((A[i].type== aWhat) && (A[i].place == aWhere))
+		if ((A[i].type == aWhat) && (A[i].place == aWhere))
 		{
 			chosenGadget[j] = stoi(A[i].number);
 			j++;
+			chosenGadgetN++;
 		}
-	int chosenGadgetN = j + 1; //сохраняем количество выбраных
-	for (i = 0; i < j; i++) cout << chosenGadget[i] << endl; //проверка	
-	cout << chosenGadgetN;
+	//for (i = 0; i < j; i++) cout << chosenGadget[i] << endl; //проверка	
+	//cout << chosenGadgetN;								   //..
 
 	//окончательный выбор редактируемого гаджета:
-	cout << endl;
-	for (i = 0; i < chosenGadgetN; i++)
-	{
-		cout << "Машина " << i + 1 << ":" << A[chosenGadget[i]].model << endl;
-	}
-	/*
-	bool uncorrectAnswer;
+	cout << "Список подходящих под описание машин:" << endl;
+	for (i = 0; i < chosenGadgetN; i++) cout << i + 1 << ":" << A[chosenGadget[i]].model << endl;
+	cout << "Введите номер машины от 1 до " << chosenGadgetN << ":" << endl;
+	bool uncorrectAnswer = 0;
 	int lastChosenGadget;
 	do
 	{
 		uncorrectAnswer = 0;
 		cin >> lastChosenGadget;
-		if (lastChosenGadget > i)
+		if ((lastChosenGadget > chosenGadgetN) || (lastChosenGadget < 1))
 		{
 			uncorrectAnswer = 1;
-			cout << "Введите пожалуйста число от 1 до" << chosenGadgetN;
+			cout << "Введите пожалуйста число от 1 до " << chosenGadgetN << endl;
 		}
-	} while (uncorrectAnswer = 1);
-	*/
-
-
+	} while (uncorrectAnswer == 1);
+	lastChosenGadget = stoi(A[chosenGadget[lastChosenGadget - 1]].number); //отныне эта переменная является номером выбранной машины
+	//cout << lastChosenGadget << endl; //проверка
+	//cout << A[lastChosenGadget].serialNumber << endl;
+	system("cls");
+	cout << "Выбрано:'" << aWhat
+		 << "' на '" << aWhere
+		 << "' модели '" << A[lastChosenGadget].model
+		 << "'" << endl;
+	//*****КОНЕЦ*****
 
 	//опрос времени:
 	/*
