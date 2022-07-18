@@ -299,38 +299,40 @@ int main()
 	//cout << chosenGadgetN;								   //..
 
 	//окончательный выбор редактируемого гаджета:
-	cout << "Список подходящих под описание машин:" << endl;
-	for (i = 0; i < chosenGadgetN; i++) cout << i + 1 << ":" << A[chosenGadget[i]].model << endl;
-	cout << "Введите номер машины от 1 до " << chosenGadgetN << ":" << endl;
-	bool uncorrectAnswer = 0;
-	int lastChosenGadget;
-	do
+	if (chosenGadgetN > 0) //если есть подходящие машины
 	{
-		uncorrectAnswer = 0;
-		cin >> lastChosenGadget;
-		if ((lastChosenGadget > chosenGadgetN) || (lastChosenGadget < 1))
+		cout << "Список подходящих под описание машин:" << endl;
+		for (i = 0; i < chosenGadgetN; i++) cout << i + 1 << ":" << A[chosenGadget[i]].model << endl;
+		cout << "Введите номер машины от 1 до " << chosenGadgetN << ":" << endl;
+		bool uncorrectAnswer = 0;
+		int lastChosenGadget;
+		do
 		{
-			uncorrectAnswer = 1;
-			cout << "Введите пожалуйста число от 1 до " << chosenGadgetN << endl;
-		}
-	} while (uncorrectAnswer == 1);
-	lastChosenGadget = stoi(A[chosenGadget[lastChosenGadget - 1]].number); //отныне эта переменная является номером выбранной машины
-	//cout << lastChosenGadget << endl; //проверка
-	//cout << A[lastChosenGadget].serialNumber << endl;
-	system("cls");
-	cout << "Выбрано:'" << aWhat
-		 << "' на '" << aWhere
-		 << "' модели '" << A[lastChosenGadget].model
-		 << "'" << endl;
-	//*****КОНЕЦ*****
-
-	//опрос времени:
-	/*
+			uncorrectAnswer = 0;
+			cin >> lastChosenGadget;
+			if ((lastChosenGadget > chosenGadgetN) || (lastChosenGadget < 1))
+			{
+				uncorrectAnswer = 1;
+				cout << "Введите пожалуйста число от 1 до " << chosenGadgetN << endl;
+			}
+		} while (uncorrectAnswer == 1);
+		lastChosenGadget = stoi(A[chosenGadget[lastChosenGadget - 1]].number); //отныне эта переменная является номером выбранной машины
+		//cout << lastChosenGadget << endl; //проверка
+		//cout << A[lastChosenGadget].serialNumber << endl;
+		system("cls");
+		cout << "Выбрано:'" << aWhat
+			<< "' на '" << aWhere
+			<< "' модели '" << A[lastChosenGadget].model
+			<< "'" << endl;
+	}
+	else cout << "Машины, подходящей под описание не существует." << endl;
+	
+	//простой опрос даты и наработки ТО:
 	int qWhen = 17;      //вопрос: Когда?
 	int aWhen = 0;		 //ответ: Когда?
-	int aWhenDay = 0;    //ответ: Когда?
-	int aWhenMonth = 0;  //ответ: Когда?
-	int aWhenYear = 0;   //ответ: Когда?
+	string aWhenString;     //ответ: Когда?
+	//string aWhenMonth;   //ответ: Когда?
+	//string aWhenYear;    //ответ: Когда?
 	while (qWhen == 17)
 	{
 		cout << "Когда сделано ТО?" << endl;
@@ -346,12 +348,17 @@ int main()
 			qWhen = 17; //Временное
 			break;
 		case 1:
-			aWhenDay = t.wDay;
-			aWhenMonth = t.wMonth;
-			aWhenYear = t.wYear;
+			aWhenString =+ t.wDay;
+			aWhenString =+ t.wMonth;
+			aWhenString =+ t.wYear;
+			//*****КОНЕЦ*****
+			//aWhenDay = t.wDay;
+			//aWhenMonth = t.wMonth;
+			//aWhenYear = t.wYear;
 			//cout << t.wHour << endl;   //а ещё можно часы
 			//cout << t.wMinute << endl; //а ещё можно минуты
 			//cout << t.wSecond << endl; //а ещё можно секунды
+			cout << aWhenString;
 			break;
 		case 2:
 			i = 1; 
@@ -360,7 +367,7 @@ int main()
 			{
 				cout << "Дата Тех. обслуживания(ДДММГГ):" << endl;
 				cin >> aWhen;
-				if (aWhen < 100000)
+				if (aWhen < 10000)
 				{
 					system("cls");
 					cout << "Введите дату с левыми нулями, пожалуйста! \nНапример, так: 010722" << endl; //ошибка
@@ -379,40 +386,40 @@ int main()
 			break;
 		}
 	}
-	*/
 
 	//вывод в файл:
 	ofstream fWrite("FileOut.csv"); //объявим вывод в файл csv
 	for (i = 0; i < n; i++)
 	{
 		fWrite << A[i].number		<< ";"; //01
-		fWrite << A[i].model		<< ";"; //02
-		fWrite << A[i].place		<< ";"; //03
-		fWrite << A[i].oil			<< ";"; //04
-		fWrite << A[i].tools		<< ";"; //05
-		fWrite << A[i].password		<< ";"; //06
-		fWrite << A[i].qtAF			<< ";"; //07
-		fWrite << A[i].qtOF			<< ";"; //08
-		fWrite << A[i].qtOS			<< ";"; //09
-		fWrite << A[i].qtBelt		<< ";"; //10
-		fWrite << A[i].info			<< ";"; //11
-		fWrite << A[i].lastDateTO	<< ";"; //12
-		fWrite << A[i].lastHoursTO	<< ";"; //13
-		fWrite << A[i].owner		<< ";"; //14
-		fWrite << A[i].serialNumber << ";"; //15
-		fWrite << A[i].AF1			<< ";"; //16
-		fWrite << A[i].AF2			<< ";"; //17
-		fWrite << A[i].AF3			<< ";"; //18
-		fWrite << A[i].OF1			<< ";"; //19
-		fWrite << A[i].OF2			<< ";"; //20
-		fWrite << A[i].OF3			<< ";"; //21
-		fWrite << A[i].OS1			<< ";"; //22
-		fWrite << A[i].OS2			<< ";"; //23
-		fWrite << A[i].OS3			<< ";"; //24
-		fWrite << A[i].Belt1		<< ";"; //25
-		fWrite << A[i].Belt2		<< ";"; //26
-		fWrite << A[i].Belt3		<< ";"; //27
-		fWrite << A[i].SHD			<< ";"; //28
+		fWrite << A[i].type			<< ";"; //02
+		fWrite << A[i].model		<< ";"; //03
+		fWrite << A[i].place		<< ";"; //04
+		fWrite << A[i].oil			<< ";"; //05
+		fWrite << A[i].tools		<< ";"; //06
+		fWrite << A[i].password		<< ";"; //07
+		fWrite << A[i].qtAF			<< ";"; //08
+		fWrite << A[i].qtOF			<< ";"; //09
+		fWrite << A[i].qtOS			<< ";"; //10
+		fWrite << A[i].qtBelt		<< ";"; //11
+		fWrite << A[i].info			<< ";"; //12
+		fWrite << A[i].lastDateTO	<< ";"; //13
+		fWrite << A[i].lastHoursTO	<< ";"; //14
+		fWrite << A[i].owner		<< ";"; //15
+		fWrite << A[i].serialNumber << ";"; //16
+		fWrite << A[i].AF1			<< ";"; //17
+		fWrite << A[i].AF2			<< ";"; //18
+		fWrite << A[i].AF3			<< ";"; //19
+		fWrite << A[i].OF1			<< ";"; //20
+		fWrite << A[i].OF2			<< ";"; //21
+		fWrite << A[i].OF3			<< ";"; //22
+		fWrite << A[i].OS1			<< ";"; //23
+		fWrite << A[i].OS2			<< ";"; //24
+		fWrite << A[i].OS3			<< ";"; //25
+		fWrite << A[i].Belt1		<< ";"; //26
+		fWrite << A[i].Belt2		<< ";"; //27
+		fWrite << A[i].Belt3		<< ";"; //28
+		fWrite << A[i].SHD			<< ";"; //29
 		fWrite << endl;
 	}
 	fWrite.close(); //закрытие файла
