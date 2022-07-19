@@ -7,6 +7,11 @@ float** A = new float *[n] {0}; // При объявлении сразу зануляем всю матрицу
 for (i = 0; i < n; i++)
 	A[i] = new float[n] {0};
 
+Дополнительные параметры для времени:
+//cout << t.wHour << endl;   //часы
+//cout << t.wMinute << endl; //минуты
+//cout << t.wSecond << endl; //секунды
+
 
 
 

@@ -71,8 +71,8 @@ int main()
 	//опрос Что и Где: 
 	int qWhat = 0;        //вопрос: Что?
 	int qWhere = 0;       //вопрос: Где?
-	string aWhat;         //ответ: Что?
-	string aWhere;        //ответ: Где?
+	string aWhat;         //ответ:  Что?
+	string aWhere;        //ответ:  Где?
 	int qWhereFirst = 0;  //уточнение первого
 	int qWhereSecond = 0; //уточнение второго
 	int qWhereThird = 0;  //уточнение третьего
@@ -295,17 +295,15 @@ int main()
 			j++;
 			chosenGadgetN++;
 		}
-	//for (i = 0; i < j; i++) cout << chosenGadget[i] << endl; //проверка	
-	//cout << chosenGadgetN;								   //..
 
 	//окончательный выбор редактируемого гаджета:
+	bool uncorrectAnswer = 0; //неверный 
+	int lastChosenGadget;
 	if (chosenGadgetN > 0) //если есть подходящие машины
 	{
 		cout << "Список подходящих под описание машин:" << endl;
 		for (i = 0; i < chosenGadgetN; i++) cout << i + 1 << ":" << A[chosenGadget[i]].model << endl;
 		cout << "Введите номер машины от 1 до " << chosenGadgetN << ":" << endl;
-		bool uncorrectAnswer = 0;
-		int lastChosenGadget;
 		do
 		{
 			uncorrectAnswer = 0;
@@ -320,17 +318,17 @@ int main()
 		//cout << lastChosenGadget << endl; //проверка
 		//cout << A[lastChosenGadget].serialNumber << endl;
 		system("cls");
-		cout << "Выбрано:'" << aWhat
-			<< "' на '" << aWhere
-			<< "' модели '" << A[lastChosenGadget].model
-			<< "'" << endl;
+		cout << "Выбрано:'" << A[lastChosenGadget].type
+			 << "' на '" << A[lastChosenGadget].place
+			 << "' модели '" << A[lastChosenGadget].model
+			 << "'" << endl;
 	}
 	else cout << "Машины, подходящей под описание не существует." << endl;
 	
 	//простой опрос даты и наработки ТО:
 	int qWhen = 17;      //вопрос: Когда?
-	int aWhen = 0;		 //ответ: Когда?
-	string aWhenString;     //ответ: Когда?
+	int aWhen = 0;		 //ответ:  Когда?
+	string aWhenString;    //ответ: Когда?
 	//string aWhenMonth;   //ответ: Когда?
 	//string aWhenYear;    //ответ: Когда?
 	while (qWhen == 17)
@@ -338,9 +336,9 @@ int main()
 		cout << "Когда сделано ТО?" << endl;
 		//cout << "0 - Назад" << endl;
 		cout << "1 - Сегодня" << endl;
+		cout << "2 - Ввести дату" << endl; //доп ветка
 		//cout << "2 - Вчера" << endl;	   //для реализации этой функции нужно будет написать календарь
 		//cout << "3 - Позавчера" << endl; //..
-		cout << "2 - Ввести дату" << endl; //доп ветка
 		cin >> qWhen;
 		switch (qWhen)
 		{
@@ -353,10 +351,6 @@ int main()
 			if ((t.wDay < 10) && (t.wMonth >= 10)) aWhenString = '0' + to_string(t.wDay) + to_string(t.wMonth) + to_string(t.wYear - 2000);
 			if ((t.wDay >= 10) && (t.wMonth < 10)) aWhenString = to_string(t.wDay) + '0' + to_string(t.wMonth) + to_string(t.wYear - 2000);
 			if ((t.wDay >= 10) && (t.wMonth >= 10)) aWhenString = to_string(t.wDay) + to_string(t.wMonth) + to_string(t.wYear - 2000);
-			//*****КОНЕЦ*****
-			//cout << t.wHour << endl;   //а ещё можно часы
-			//cout << t.wMinute << endl; //а ещё можно минуты
-			//cout << t.wSecond << endl; //а ещё можно секунды
 			cout << aWhenString << endl;
 			break;
 		case 2:
@@ -365,11 +359,11 @@ int main()
 			while (i == 1)
 			{
 				cout << "Дата Тех. обслуживания(ДДММГГ):" << endl;
-				cin >> aWhen;
-				if (aWhen < 10000)
+				cin >> aWhenString;
+				if (aWhenString.length() != 6)
 				{
 					system("cls");
-					cout << "Введите дату с левыми нулями, пожалуйста! \nНапример, так: 010722" << endl; //ошибка
+					cout << "Введите дату с левыми нулями, пожалуйста! \nНапример, так: 010700" << endl; //ошибка
 				}
 				else i = 0;
 			}
@@ -385,6 +379,22 @@ int main()
 			break;
 		}
 	}
+
+	//ввод ТО:
+	unsigned long int aHowMuch;	//ответ: Какая наработка?
+	cout << "Какая наработка после ТО?" << endl;
+	cin >> aHowMuch;
+
+	//первое заполнение ячейки наработки и времени:
+	system("cls");
+	cout << "Полученные данные:'" << A[lastChosenGadget].type
+		 << "' на '" << A[lastChosenGadget].place
+		 << "' модели '" << A[lastChosenGadget].model
+		 << "'" << endl;
+	if (qWhen == 1) cout << "Сегодняшняя дата: " << aWhenString;
+	if (qWhen == 2) cout << "Введена дата ТО:" << aWhenString;
+	cout << endl << "Введена наработка: " << aHowMuch;
+
 
 	//вывод в файл:
 	ofstream fWrite("FileOut.csv"); //объявим вывод в файл csv

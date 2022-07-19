@@ -5,7 +5,7 @@ using namespace std;
 class gadget
 {
 public:
-	~gadget(){}; //деструктор
+	~gadget() {}; //деструктор
 	string number; //порядковый номер установки
 	string type; //порядковый номер установки
 	string model; //название модели
