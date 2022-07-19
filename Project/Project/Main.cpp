@@ -22,15 +22,11 @@ int main()
 	SetConsoleOutputCP(1251);     //..
 	int i, j; //переменные циклов
 
-	ifstream fin("FileSourse.csv"); //открытие файла
-	string gadgetString[n]; //массив строчек каждого устройства
-	//int lengthString[n]{}; //массив с длинами строчек
-	for (i = 0; i < n; i++)
-	{
-		getline(fin, gadgetString[i]); //читает строку
-		//lengthString[i] = gadgetString[i].length(); //вычисляет кол-во символов в строке (мб и пригодится)
-	}
-	fin.close(); //закрытие файла
+	//чтение таблицы:
+	ifstream fRead("FileSourse.csv"); //открытие файла
+	string* gadgetString = new string[n]; //динамический массив строчек каждого устройства
+	for (i = 0; i < n; i++) getline(fRead, gadgetString[i]); //читает строку
+	fRead.close(); //закрытие файла
 
 	//заполнение структуры:	
 	gadget A[n];
@@ -328,9 +324,7 @@ int main()
 	//простой опрос даты и наработки ТО:
 	int qWhen = 17;      //вопрос: Когда?
 	int aWhen = 0;		 //ответ:  Когда?
-	string aWhenString;    //ответ: Когда?
-	//string aWhenMonth;   //ответ: Когда?
-	//string aWhenYear;    //ответ: Когда?
+	string aWhenString;  //ответ: Когда?
 	while (qWhen == 17)
 	{
 		cout << "Когда сделано ТО?" << endl;
@@ -387,7 +381,7 @@ int main()
 
 	//первое заполнение ячейки наработки и времени:
 	system("cls");
-	cout << "Полученные данные:'" << A[lastChosenGadget].type
+	cout << "Собранные данные:'" << A[lastChosenGadget].type
 		 << "' на '" << A[lastChosenGadget].place
 		 << "' модели '" << A[lastChosenGadget].model
 		 << "'" << endl;
@@ -395,6 +389,24 @@ int main()
 	if (qWhen == 2) cout << "Введена дата ТО:" << aWhenString;
 	cout << endl << "Введена наработка: " << aHowMuch;
 
+	cout << endl << "Вы уверены что ходите внести изменения? (0-нет, 1-да)";
+	int ready;
+	cin >> ready;
+	cout << endl;
+	switch (ready)
+	{
+	case 0:
+		exit(0); //обиделся
+		break;
+	case 1:
+		A[lastChosenGadget].lastDateTO = aWhenString;
+		A[lastChosenGadget].lastHoursTO = to_string(aHowMuch);
+		cout << "Данные успешно внесены!" << endl;
+		break;
+	default:
+		exit(0); //обиделся
+		break;
+	}
 
 	//вывод в файл:
 	ofstream fWrite("FileOut.csv"); //объявим вывод в файл csv
@@ -432,7 +444,7 @@ int main()
 		fWrite << endl;
 	}
 	fWrite.close(); //закрытие файла
-	
+
 	/* выход из проги не работает:
 	cout << "Конец программы. Для выхода нажмите Enter" << endl;
 	char closeProgramm = getchar(); //выход с проги через Enter
