@@ -348,17 +348,16 @@ int main()
 			qWhen = 17; //Временное
 			break;
 		case 1:
-			aWhenString =+ t.wDay;
-			aWhenString =+ t.wMonth;
-			aWhenString =+ t.wYear;
+			//запоминаем дату в формате ДДММГГ:
+			if ((t.wDay < 10) && (t.wMonth < 10)) aWhenString = '0' + to_string(t.wDay) + '0' + to_string(t.wMonth) + to_string(t.wYear-2000);
+			if ((t.wDay < 10) && (t.wMonth >= 10)) aWhenString = '0' + to_string(t.wDay) + to_string(t.wMonth) + to_string(t.wYear - 2000);
+			if ((t.wDay >= 10) && (t.wMonth < 10)) aWhenString = to_string(t.wDay) + '0' + to_string(t.wMonth) + to_string(t.wYear - 2000);
+			if ((t.wDay >= 10) && (t.wMonth >= 10)) aWhenString = to_string(t.wDay) + to_string(t.wMonth) + to_string(t.wYear - 2000);
 			//*****КОНЕЦ*****
-			//aWhenDay = t.wDay;
-			//aWhenMonth = t.wMonth;
-			//aWhenYear = t.wYear;
 			//cout << t.wHour << endl;   //а ещё можно часы
 			//cout << t.wMinute << endl; //а ещё можно минуты
 			//cout << t.wSecond << endl; //а ещё можно секунды
-			cout << aWhenString;
+			cout << aWhenString << endl;
 			break;
 		case 2:
 			i = 1; 
