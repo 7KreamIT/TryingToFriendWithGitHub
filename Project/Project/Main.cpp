@@ -22,6 +22,11 @@ int main()
 	SetConsoleOutputCP(1251);     //..
 	int i, j; //переменные циклов
 
+	//подсчёт количества столбцов:
+	ifstream fRead("FileSourse.csv"); //открытие файла
+
+	//int* chosenGadget = new int[n];
+
 	//чтение таблицы:
 	ifstream fRead("FileSourse.csv"); //открытие файла
 	string* gadgetString = new string[n]; //динамический массив строчек каждого устройства
@@ -67,11 +72,9 @@ int main()
 	//опрос Что и Где: 
 	int qWhat = 0;        //вопрос: Что?
 	int qWhere = 0;       //вопрос: Где?
+	int qWhereFirst = 0;  //первое уточнение: Где?
 	string aWhat;         //ответ:  Что?
 	string aWhere;        //ответ:  Где?
-	int qWhereFirst = 0;  //уточнение первого
-	int qWhereSecond = 0; //уточнение второго
-	int qWhereThird = 0;  //уточнение третьего
 	//цикл на выходе из которого имеем aWhat и уточнённый aWhere:
 	qWhat = 17; //разрешение на опрос
 	while (qWhat == 17)
@@ -185,8 +188,8 @@ int main()
 				aWhere = "Шихта";
 				break;
 			case 4:
-				qWhereSecond = 17;
-				while (qWhereSecond == 17)
+				qWhereFirst = 17;
+				while (qWhereFirst == 17)
 				{
 					system("cls");
 					cout << "Выбрано:'" << aWhat << "' " << endl;
@@ -194,26 +197,26 @@ int main()
 					cout << "0 - Назад" << endl;
 					cout << "1 - Первый (Ближе)" << endl;
 					cout << "2 - Второй (Дальше)" << endl;
-					cin >> qWhereSecond;
-					switch (qWhereSecond)
+					cin >> qWhereFirst;
+					switch (qWhereFirst)
 					{
 					case 0:
 						qWhere = 17;
-						qWhereSecond = 0;
+						qWhereFirst = 0;
 						system("cls");
 						break;
 					case 1:
 						aWhere = "ГП 1";
-						qWhereSecond = 0;
+						qWhereFirst = 0;
 						qWhere = 0;
 						break;
 					case 2:
 						aWhere = "ГП 2";
-						qWhereSecond = 0;
+						qWhereFirst = 0;
 						qWhere = 0;
 						break;
 					default:
-						qWhereSecond = 17;
+						qWhereFirst = 17;
 						system("cls");
 						break;
 					}
@@ -226,8 +229,8 @@ int main()
 				aWhere = "Пульп.";
 				break;
 			case 7:
-				qWhereThird = 17;
-				while (qWhereThird == 17)
+				qWhereFirst = 17;
+				while (qWhereFirst == 17)
 				{
 					system("cls");
 					cout << "Выбрано:'" << aWhat << "' " << endl;
@@ -235,26 +238,26 @@ int main()
 					cout << "0 - Назад" << endl;
 					cout << "1 - Ну то, что рядом с ДОФом" << endl;
 					cout << "2 - Новое" << endl;
-					cin >> qWhereThird;
-					switch (qWhereThird)
+					cin >> qWhereFirst;
+					switch (qWhereFirst)
 					{
 					case 0:
 						qWhere = 17;
-						qWhereThird = 0;
+						qWhereFirst = 0;
 						system("cls");
 						break;
 					case 1:
 						aWhere = "Сгущ.";
-						qWhereThird = 0;
+						qWhereFirst = 0;
 						qWhere = 0;
 						break;
 					case 2:
 						aWhere = "Нов.сгущ.";
-						qWhereThird = 0;
+						qWhereFirst = 0;
 						qWhere = 0;
 						break;
 					default:
-						qWhereThird = 17;
+						qWhereFirst = 17;
 						system("cls");
 						break;
 					}
@@ -293,7 +296,7 @@ int main()
 		}
 
 	//окончательный выбор редактируемого гаджета:
-	bool uncorrectAnswer = 0; //неверный 
+	bool uncorrectAnswer = 0; //неверный ответ
 	int lastChosenGadget;
 	if (chosenGadgetN > 0) //если есть подходящие машины
 	{
@@ -319,9 +322,9 @@ int main()
 			 << "' модели '" << A[lastChosenGadget].model
 			 << "'" << endl;
 	}
-	else cout << "Машины, подходящей под описание не существует." << endl;
+	else cout << "Машин, подходящих под описание не существует." << endl;
 	
-	//простой опрос даты и наработки ТО:
+	//простой опрос даты и наработки:
 	int qWhen = 17;      //вопрос: Когда?
 	int aWhen = 0;		 //ответ:  Когда?
 	string aWhenString;  //ответ: Когда?
