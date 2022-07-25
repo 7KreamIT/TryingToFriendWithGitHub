@@ -24,7 +24,8 @@ int main()
 
 	//чтение таблицы:
 	ifstream fRead("FileSourse.csv"); //открытие файла
-	string* gadgetString = new string[n]; //динамический массив строчек каждого устройства
+	//string* gadgetString = new string[n]; //динамический массив строчек каждого устройства (можно сделать в будущем
+	string gadgetString[n];
 	for (i = 0; i < n; i++) getline(fRead, gadgetString[i]); //читает строку
 	fRead.close(); //закрытие файла
 
@@ -76,7 +77,7 @@ int main()
 	qWhat = 17; //разрешение на опрос
 	while (qWhat == 17)
 	{
-		cout << "Окей, летс го!" << endl;
+		cout << "Начало программы" << endl;
 		cout << "Что за устройство?" << endl;
 		cout << "0 - Выход из программы" << endl;
 		cout << "1 - Компрессор" << endl;
@@ -389,7 +390,7 @@ int main()
 	if (qWhen == 2) cout << "Введена дата ТО:" << aWhenString;
 	cout << endl << "Введена наработка: " << aHowMuch;
 
-	cout << endl << "Вы уверены что ходите внести изменения? (0-нет, 1-да)";
+	cout << endl << "Вы уверены что ходите внести изменения? (1-да, 0-нет)";
 	int ready;
 	cin >> ready;
 	cout << endl;
