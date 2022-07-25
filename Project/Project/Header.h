@@ -6,6 +6,7 @@ class gadget
 {
 public:
 	~gadget() {}; //деструктор
+	string location; //локация устройства
 	string number; //порядковый номер установки
 	string type; //порядковый номер установки
 	string model; //название модели
