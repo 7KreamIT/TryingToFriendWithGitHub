@@ -21,7 +21,7 @@ int main()
 	SetConsoleCP(1251);           //..
 	SetConsoleOutputCP(1251);     //..
 	int i, j; //переменные циклов
-
+	//moded
 	//чтение таблицы:
 	ifstream fRead("Справка.csv"); //открытие файла
 	string* gadgetString = new string[n]; //динамический массив строчек каждого устройства
