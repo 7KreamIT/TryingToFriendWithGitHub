@@ -9,7 +9,7 @@
 #include "Header.h"	     //мой заголовок
 #include <ctime>		 //для вывода времени
 using namespace std;
-const int n = 87; //кол-во строк (i - переменная цикла)
+const int n = 86; //кол-во строк (i - переменная цикла)
 const int m = 30; //кол-во столбцов (j - переменная цикла)
 
 int main()
@@ -21,10 +21,11 @@ int main()
 	SetConsoleCP(1251);           //..
 	SetConsoleOutputCP(1251);     //..
 	int i, j; //переменные циклов
-	//moded
+
 	//чтение таблицы:
 	ifstream fRead("Справка.csv"); //открытие файла
-	string* gadgetString = new string[n]; //динамический массив строчек каждого устройства
+	//string* gadgetString = new string[n]; //динамический массив строчек каждого устройства
+	string gadgetString[n];
 	for (i = 0; i < n; i++) getline(fRead, gadgetString[i]); //читает строку
 	fRead.close(); //закрытие файла
 
@@ -324,14 +325,16 @@ int main()
 	int qWhen = 17;      //вопрос: Когда?
 	int aWhen = 0;		 //ответ:  Когда?
 	string aWhenString;  //ответ: Когда?
+	int monthSize[12]{ 31,28,31,30,31,30,31,31,30,31,30,31 }; //дни в месяцах
+	int tempDay; //временная переменная дня
 	while (qWhen == 17)
 	{
 		cout << "Когда сделано ТО?" << endl;
 		//cout << "0 - Назад" << endl;
 		cout << "1 - Сегодня" << endl;
-		cout << "2 - Ввести дату" << endl; //доп ветка
-		//cout << "2 - Вчера" << endl;	   //для реализации этой функции нужно будет написать календарь
-		//cout << "3 - Позавчера" << endl; //..
+		cout << "2 - Вчера" << endl;
+		cout << "3 - Ввести дату" << endl;
+		//cout << "4 - Позавчера" << endl; //можно поделать если станет скучно
 		cin >> qWhen;
 		switch (qWhen)
 		{
@@ -340,14 +343,24 @@ int main()
 			break;
 		case 1:
 			//запоминаем дату в формате ДДММГГ:
-			if ((t.wDay < 10) && (t.wMonth < 10))   aWhenString = '0' + to_string(t.wDay) + '0' + to_string(t.wMonth) + to_string(t.wYear-2000);
-			if ((t.wDay < 10) && (t.wMonth >= 10))  aWhenString = '0' + to_string(t.wDay) + to_string(t.wMonth) + to_string(t.wYear - 2000);
-			if ((t.wDay >= 10) && (t.wMonth < 10))  aWhenString = to_string(t.wDay) + '0' + to_string(t.wMonth) + to_string(t.wYear - 2000);
-			if ((t.wDay >= 10) && (t.wMonth >= 10)) aWhenString = to_string(t.wDay) + to_string(t.wMonth) + to_string(t.wYear - 2000);
+			aWhenString = dateToSixNumbers(t.wDay, t.wMonth, t.wYear);
 			cout << aWhenString << endl;
 			break;
 		case 2:
-			i = 1; 
+			if (t.wDay == 1)
+			{
+				if (t.wMonth == 1) aWhenString = to_string(31) + to_string(12) + to_string(t.wYear - 2001);
+				else
+				{
+					if ((monthSize[t.wMonth - 1] == 1) && ((t.wYear - 2000) % 4 == 0)) tempDay = monthSize[t.wMonth - 1] + 1;
+					else tempDay = monthSize[t.wMonth - 1] + 1; //если не високосный
+					aWhenString = dateToSixNumbers(tempDay, t.wMonth - 1, t.wYear);
+				}
+			}
+			else aWhenString = dateToSixNumbers(t.wDay - 1, t.wMonth, t.wYear);
+			break;			
+		case 3:
+			i = 1;
 			system("cls");
 			while (i == 1)
 			{
@@ -360,9 +373,6 @@ int main()
 				}
 				else i = 0;
 			}
-			break;
-		case 3:
-			qWhen = 17; //Временное
 			break;
 		case 4:
 			qWhen = 17; //Временное
@@ -388,7 +398,7 @@ int main()
 	if (qWhen == 2) cout << "Введена дата ТО:" << aWhenString;
 	cout << endl << "Введена наработка: " << aHowMuch;
 
-	cout << endl << "Вы уверены что ходите внести изменения? (0-нет, 1-да)";
+	cout << endl << "Вы уверены что ходите внести изменения? (1-да, 0-нет)\n";
 	int ready;
 	cin >> ready;
 	cout << endl;
