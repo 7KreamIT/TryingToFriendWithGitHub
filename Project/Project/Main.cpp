@@ -9,7 +9,7 @@
 #include "Header.h"	     //мой заголовок
 #include <ctime>		 //для вывода времени
 using namespace std;
-const int n = 86; //кол-во строк (i - переменная цикла)
+const int nMax = 100; //максимальное кол-во строк (i - переменная цикла)
 const int m = 30; //кол-во столбцов (j - переменная цикла)
 
 int main()
@@ -21,16 +21,19 @@ int main()
 	SetConsoleCP(1251);           //..
 	SetConsoleOutputCP(1251);     //..
 	int i, j; //переменные циклов
+	int n; //фактическое кол-во строк (i - переменная цикла)
 
 	//чтение таблицы:
-	ifstream fRead("Справка.csv"); //открытие файла
-	//string* gadgetString = new string[n]; //динамический массив строчек каждого устройства
-	string gadgetString[n];
-	for (i = 0; i < n; i++) getline(fRead, gadgetString[i]); //читает строку
+	ifstream fRead("Справка.csv"); //открытие файла для подсчёта строк
+	string gadgetString[nMax];
+	i = 0;
+	while (!fRead.eof()) getline(fRead, gadgetString[i++]); //читает строку				
+	n = i - 2;
+	cout << n;
 	fRead.close(); //закрытие файла
 
 	//заполнение структуры:	
-	gadget A[n];
+	gadget* A = new gadget[n];
 	for (i = 0; i < n; i++) //нулевая строка это заголовки
 	{
 		j = 0;
@@ -76,7 +79,7 @@ int main()
 	qWhat = 17; //разрешение на опрос
 	while (qWhat == 17)
 	{
-		cout << "Окей, летс го!" << endl;
+		cout << "Начало программы." << endl;
 		cout << "Что за устройство?" << endl;
 		cout << "0 - Выход из программы" << endl;
 		cout << "1 - Компрессор" << endl;
@@ -279,7 +282,7 @@ int main()
 			cout << "Выбрано:'" << aWhat << "' на '" << aWhere << "'" << endl;
 		}
 	}
-
+	
 	//формирование динамического массива с номерами гаджетов, подходящих описанию:
 	int* chosenGadget = new int[n] {0}; // При объявлении сразу зануляем всю матрицу
 	int chosenGadgetN = 0; //количество выбраных
@@ -352,8 +355,8 @@ int main()
 				if (t.wMonth == 1) aWhenString = to_string(31) + to_string(12) + to_string(t.wYear - 2001);
 				else
 				{
-					if ((monthSize[t.wMonth - 1] == 1) && ((t.wYear - 2000) % 4 == 0)) tempDay = monthSize[t.wMonth - 1] + 1;
-					else tempDay = monthSize[t.wMonth - 1] + 1; //если не високосный
+					if ((monthSize[t.wMonth - 1] == 1) && ((t.wYear - 2000) % 4 == 0)) tempDay = 29; //если високосный
+					else tempDay = monthSize[t.wMonth - 1];
 					aWhenString = dateToSixNumbers(tempDay, t.wMonth - 1, t.wYear);
 				}
 			}
@@ -421,46 +424,41 @@ int main()
 	ofstream fWrite("СправкаOut.csv"); //объявим вывод в файл csv
 	for (i = 0; i < n; i++)
 	{
-		fWrite << A[i].location	    << ";"; //01
-		fWrite << A[i].number		<< ";"; //02
-		fWrite << A[i].type			<< ";"; //03
-		fWrite << A[i].model		<< ";"; //04
-		fWrite << A[i].place		<< ";"; //05
-		fWrite << A[i].oil			<< ";"; //06
-		fWrite << A[i].tools		<< ";"; //07
-		fWrite << A[i].password		<< ";"; //08
-		fWrite << A[i].qtAF			<< ";"; //09
-		fWrite << A[i].qtOF			<< ";"; //10
-		fWrite << A[i].qtOS			<< ";"; //11
-		fWrite << A[i].qtBelt		<< ";"; //12
-		fWrite << A[i].info			<< ";"; //13
-		fWrite << A[i].lastDateTO	<< ";"; //14
-		fWrite << A[i].lastHoursTO	<< ";"; //15
-		fWrite << A[i].owner		<< ";"; //16
-		fWrite << A[i].serialNumber << ";"; //17
-		fWrite << A[i].AF1			<< ";"; //18
-		fWrite << A[i].AF2			<< ";"; //19
-		fWrite << A[i].AF3			<< ";"; //20
-		fWrite << A[i].OF1			<< ";"; //21
-		fWrite << A[i].OF2			<< ";"; //22
-		fWrite << A[i].OF3			<< ";"; //23
-		fWrite << A[i].OS1			<< ";"; //24
-		fWrite << A[i].OS2			<< ";"; //25
-		fWrite << A[i].OS3			<< ";"; //26
-		fWrite << A[i].Belt1		<< ";"; //27
-		fWrite << A[i].Belt2		<< ";"; //28
-		fWrite << A[i].Belt3		<< ";"; //29
-		fWrite << A[i].SHD			<< ";"; //30
-		fWrite << endl;
+		fWrite << A[i].location	    << ";";  //01
+		fWrite << A[i].number		<< ";";  //02
+		fWrite << A[i].type			<< ";";  //03
+		fWrite << A[i].model		<< ";";  //04
+		fWrite << A[i].place		<< ";";  //05
+		fWrite << A[i].oil			<< ";";  //06
+		fWrite << A[i].tools		<< ";";  //07
+		fWrite << A[i].password		<< ";";  //08
+		fWrite << A[i].qtAF			<< ";";  //09
+		fWrite << A[i].qtOF			<< ";";  //10
+		fWrite << A[i].qtOS			<< ";";  //11
+		fWrite << A[i].qtBelt		<< ";";  //12
+		fWrite << A[i].info			<< ";";  //13
+		fWrite << A[i].lastDateTO	<< ";";  //14
+		fWrite << A[i].lastHoursTO	<< ";";  //15
+		fWrite << A[i].owner		<< ";";  //16
+		fWrite << A[i].serialNumber << ";";  //17
+		fWrite << A[i].AF1			<< ";";  //18
+		fWrite << A[i].AF2			<< ";";  //19
+		fWrite << A[i].AF3			<< ";";  //20
+		fWrite << A[i].OF1			<< ";";  //21
+		fWrite << A[i].OF2			<< ";";  //22
+		fWrite << A[i].OF3			<< ";";  //23
+		fWrite << A[i].OS1			<< ";";  //24
+		fWrite << A[i].OS2			<< ";";  //25
+		fWrite << A[i].OS3			<< ";";  //26
+		fWrite << A[i].Belt1		<< ";";  //27
+		fWrite << A[i].Belt2		<< ";";  //28
+		fWrite << A[i].Belt3		<< ";";  //29
+		fWrite << A[i].SHD			<< endl; //30
 	}
 	fWrite.close(); //закрытие файла
-
-	/* выход из проги не работает:
-	cout << "Конец программы. Для выхода нажмите Enter" << endl;
-	char closeProgramm = getchar(); //выход с проги через Enter
-	if (closeProgramm == '\n');		//..
-	delete A; //деструктор
-	*/
+	
+	delete[] A;
+	delete chosenGadget; //отчистить память
 
 	return (0);
 }
