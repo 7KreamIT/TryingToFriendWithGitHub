@@ -30,3 +30,38 @@ string dateToSixNumbers(int day, int month, int year)
 	}
 	return date;
 }
+
+//функция выводит лишь один номер устройства, которое собираемся менять:
+int winGadget(gadget* A, int* x, int n) //x - это массив с подходящими под описание устройствами, n - их кол-во
+{
+	bool uncorrectAnswer = 0; //неверный ответ
+	int chosenGadget; //итоговый номер устройства
+	if (n > 0) //если есть подходящие машины
+	{
+		if (n > 1) //если машин больше чем 1
+		{
+			cout << "Список подходящих под описание машин:" << endl;
+			for (int i = 0; i < n; i++) cout << i + 1 << ":" << A[x[i]].model << endl;
+			cout << "Введите номер машины от 1 до " << n << ":" << endl;
+			do
+			{
+				uncorrectAnswer = 0;
+				cin >> chosenGadget;
+				if ((chosenGadget > n) || (chosenGadget < 1))
+				{
+					uncorrectAnswer = 1;
+					cout << "Введите пожалуйста число от 1 до " << n << endl;
+				}
+			} while (uncorrectAnswer == 1);
+			chosenGadget = stoi(A[x[chosenGadget - 1]].number); //отныне эта переменная является номером выбранной машины
+		}
+		else chosenGadget = stoi(A[x[0]].number);
+		system("cls");
+		cout << "Выбрано:'" << A[chosenGadget].type
+			<< "' на '" << A[chosenGadget].place
+			<< "' модели '" << A[chosenGadget].model
+			<< "'" << endl;
+	}
+	else cout << "Машин, подходящих под описание не существует." << endl;
+	return chosenGadget;
+}

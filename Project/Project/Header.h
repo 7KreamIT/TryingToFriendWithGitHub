@@ -40,3 +40,5 @@ public:
 };
 
 string dateToSixNumbers(int day, int month, int year);
+
+int winGadget(gadget* A, int* x, int n);

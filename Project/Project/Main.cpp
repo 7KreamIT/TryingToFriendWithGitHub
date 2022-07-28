@@ -27,9 +27,8 @@ int main()
 	ifstream fRead("Справка.csv"); //открытие файла для подсчёта строк
 	string gadgetString[nMax];
 	i = 0;
-	while (!fRead.eof()) getline(fRead, gadgetString[i++]); //читает строку				
-	n = i - 2;
-	cout << n;
+	while (!fRead.eof()) getline(fRead, gadgetString[i++]); //читает всю строку				
+	n = i - 2; //запомнили кол-во устройств
 	fRead.close(); //закрытие файла
 
 	//заполнение структуры:	
@@ -66,7 +65,7 @@ int main()
 		while (gadgetString[i][j] != ';')  A[i].Belt1		 += gadgetString[i][j++]; j++; //27
 		while (gadgetString[i][j] != ';')  A[i].Belt2		 += gadgetString[i][j++]; j++; //28
 		while (gadgetString[i][j] != ';')  A[i].Belt3		 += gadgetString[i][j++]; j++; //29
-										   A[i].SHD		     += gadgetString[i][j];        //30 
+										   A[i].SHD		     += gadgetString[i][j++]; j++; //30 
 	}
 
 	//опрос Что и Где: 
@@ -275,6 +274,7 @@ int main()
 				cout << "Введите число от 0 до 9!" << endl;
 				break;
 			}
+
 		}
 		if (qWhat != 17) //вывод результатов опроса
 		{
@@ -284,7 +284,7 @@ int main()
 	}
 	
 	//формирование динамического массива с номерами гаджетов, подходящих описанию:
-	int* chosenGadget = new int[n] {0}; // При объявлении сразу зануляем всю матрицу
+	int* chosenGadget = new int[n] {0}; //массив выбранных устройств
 	int chosenGadgetN = 0; //количество выбраных
 	j = 0;
 	for (i = 0; i < n; i++)
@@ -296,35 +296,9 @@ int main()
 		}
 
 	//окончательный выбор редактируемого гаджета:
-	bool uncorrectAnswer = 0; //неверный ответ
-	int lastChosenGadget;
-	if (chosenGadgetN > 0) //если есть подходящие машины
-	{
-		cout << "Список подходящих под описание машин:" << endl;
-		for (i = 0; i < chosenGadgetN; i++) cout << i + 1 << ":" << A[chosenGadget[i]].model << endl;
-		cout << "Введите номер машины от 1 до " << chosenGadgetN << ":" << endl;
-		do
-		{
-			uncorrectAnswer = 0;
-			cin >> lastChosenGadget;
-			if ((lastChosenGadget > chosenGadgetN) || (lastChosenGadget < 1))
-			{
-				uncorrectAnswer = 1;
-				cout << "Введите пожалуйста число от 1 до " << chosenGadgetN << endl;
-			}
-		} while (uncorrectAnswer == 1);
-		lastChosenGadget = stoi(A[chosenGadget[lastChosenGadget - 1]].number); //отныне эта переменная является номером выбранной машины
-		//cout << lastChosenGadget << endl; //проверка
-		//cout << A[lastChosenGadget].serialNumber << endl;
-		system("cls");
-		cout << "Выбрано:'" << A[lastChosenGadget].type
-			 << "' на '" << A[lastChosenGadget].place
-			 << "' модели '" << A[lastChosenGadget].model
-			 << "'" << endl;
-	}
-	else cout << "Машин, подходящих под описание не существует." << endl;
+	int lastChosenGadget = winGadget(A, chosenGadget, chosenGadgetN);	
 	
-	//простой опрос даты и наработки:
+	//опрос даты и наработки:
 	int qWhen = 17;      //вопрос: Когда?
 	int aWhen = 0;		 //ответ:  Когда?
 	string aWhenString;  //ответ: Когда?
