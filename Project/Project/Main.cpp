@@ -74,7 +74,14 @@ int main()
 	int qWhereFirst = 0;  //первое уточнение: Где?
 	string aWhat;         //ответ:  Что?
 	string aWhere;        //ответ:  Где?
-	//цикл на выходе из которого имеем aWhat и уточнённый aWhere:
+
+	int qWhen = 0;      //вопрос: Когда?
+	int aWhen = 0;		 //ответ:  Когда?
+	string aWhenString;  //ответ: Когда?
+	int monthSize[12]{ 31,28,31,30,31,30,31,31,30,31,30,31 }; //дни в месяцах
+	int tempDay; //временная переменная дня
+
+	//главный цикл:
 	qWhat = 17; //разрешение на опрос
 	while (qWhat == 17)
 	{
@@ -92,24 +99,23 @@ int main()
 			break;
 		case 1:
 			aWhat = "КП";
-			qWhere = 17; //разрешение на следущий цикл
-			system("cls");
 			break;
 		case 2:
 			aWhat = "ВД";
-			qWhere = 17; //разрешение на следущий цикл
-			system("cls");
 			break;
 		case 3:
 			aWhat = "ОС";
-			qWhere = 17; //разрешение на следущий цикл
-			system("cls");
 			break;
 		default:
 			qWhat = 17;
 			system("cls");
 			cout << "Введите число от 0 до 3!" << endl;
 			break;
+		}
+		if ((qWhat > 0) && (qWhat <= 3)) //разрешение и переход на следующий цикл
+		{
+			qWhere = 17;
+			system("cls");
 		}
 		while (qWhere == 17)
 		{
@@ -124,7 +130,7 @@ int main()
 			cout << "6 - Пульпанасосная" << endl;
 			cout << "7 - Сгущение" << endl; //доп ветка
 			cout << "8 - Станция Комбинатская" << endl;
-			cout << "9 - Перегрузка" << endl; 
+			cout << "9 - Другое" << endl; 
 			cin >> qWhere;
 			switch (qWhere)
 			{
@@ -149,34 +155,31 @@ int main()
 					switch (qWhereFirst)
 					{
 					case 0:
-						qWhere = 17;
 						qWhereFirst = 0;
+						qWhere = 17;
 						system("cls");
 						break;
 					case 1:
 						aWhere = "Обжиг";
-						qWhereFirst = 0;
-						qWhere = 0;
 						break;
 					case 2:
 						aWhere = "2 очер.";
-						qWhereFirst = 0;
-						qWhere = 0;
 						break;
 					case 3:
 						aWhere = "3 очер.";
-						qWhereFirst = 0;
-						qWhere = 0;
 						break;
 					case 4:
 						aWhere = "-3 м";
-						qWhereFirst = 0;
-						qWhere = 0;
 						break;
 					default:
 						qWhereFirst = 17;
 						system("cls");
 						break;
+					}
+					if ((qWhereFirst >= 1) && (qWhereFirst <= 4)) //закрытие доп ветки всвязи с получением ответа
+					{
+						qWhereFirst = 0;
+						qWhere = 0;
 					}
 				}				
 				break;
@@ -206,18 +209,19 @@ int main()
 						break;
 					case 1:
 						aWhere = "ГП 1";
-						qWhereFirst = 0;
-						qWhere = 0;
 						break;
 					case 2:
 						aWhere = "ГП 2";
-						qWhereFirst = 0;
-						qWhere = 0;
 						break;
 					default:
 						qWhereFirst = 17;
 						system("cls");
 						break;
+					}
+					if ((qWhereFirst >= 1) && (qWhereFirst <= 2)) //закрытие доп ветки всвязи с получением ответа
+					{
+						qWhereFirst = 0;
+						qWhere = 0;
 					}
 				}
 				break;
@@ -241,24 +245,25 @@ int main()
 					switch (qWhereFirst)
 					{
 					case 0:
-						qWhere = 17;
 						qWhereFirst = 0;
+						qWhere = 17;
 						system("cls");
 						break;
 					case 1:
 						aWhere = "Сгущ.";
-						qWhereFirst = 0;
-						qWhere = 0;
 						break;
 					case 2:
 						aWhere = "Нов.сгущ.";
-						qWhereFirst = 0;
-						qWhere = 0;
 						break;
 					default:
 						qWhereFirst = 17;
 						system("cls");
 						break;
+					}
+					if ((qWhereFirst >= 1) && (qWhereFirst <= 2)) //закрытие доп ветки всвязи с получением ответа
+					{
+						qWhereFirst = 0;
+						qWhere = 0;
 					}
 				}				
 				break;
@@ -266,7 +271,7 @@ int main()
 				aWhere = "Комб-ая";
 				break;
 			case 9:
-				aWhere = "Перегр.";
+				aWhere = "Ещё не готово :с";
 				break;
 			default:
 				system("cls");
@@ -274,12 +279,65 @@ int main()
 				cout << "Введите число от 0 до 9!" << endl;
 				break;
 			}
-
-		}
-		if (qWhat != 17) //вывод результатов опроса
-		{
-			system("cls");
-			cout << "Выбрано:'" << aWhat << "' на '" << aWhere << "'" << endl;
+			//	if ((qWhere >= 1) && (qWhere <= 9)) //разрешение и переход на следующий цикл
+			//	{
+			//		qWhen = 17;
+			//		system("cls");
+			//	}
+			//	while (qWhen == 17)
+			//	{
+			//		system("cls");
+			//		cout << "Выбрано:'" << aWhat << "' на '" << aWhere << "'" << endl;
+			//		cout << "Когда сделано ТО?" << endl;
+			//		//cout << "0 - Назад" << endl;
+			//		cout << "1 - Сегодня" << endl;
+			//		cout << "2 - Вчера" << endl;
+			//		cout << "3 - Ввести дату" << endl;
+			//		//cout << "4 - Позавчера" << endl; //можно поделать если станет скучно
+			//		cin >> qWhen;
+			//		switch (qWhen)
+			//		{
+			//		case 0:
+			//			qWhen = 17; //Временное
+			//			break;
+			//		case 1:
+			//			//запоминаем дату в формате ДДММГГ:
+			//			aWhenString = dateToSixNumbers(t.wDay, t.wMonth, t.wYear);
+			//			cout << aWhenString << endl;
+			//			break;
+			//		case 2:
+			//			if (t.wDay == 1)
+			//			{
+			//				if (t.wMonth == 1) aWhenString = to_string(31) + to_string(12) + to_string(t.wYear - 2001);
+			//				else
+			//				{
+			//					if ((monthSize[t.wMonth - 1] == 1) && ((t.wYear - 2000) % 4 == 0)) tempDay = 29; //если високосный
+			//					else tempDay = monthSize[t.wMonth - 1];
+			//					aWhenString = dateToSixNumbers(tempDay, t.wMonth - 1, t.wYear);
+			//				}
+			//			}
+			//			else aWhenString = dateToSixNumbers(t.wDay - 1, t.wMonth, t.wYear);
+			//			break;
+			//		case 3:
+			//			i = 1;
+			//			system("cls");
+			//			while (i == 1)
+			//			{
+			//				cout << "Дата Тех. обслуживания(ДДММГГ):" << endl;
+			//				cin >> aWhenString;
+			//				if (aWhenString.length() != 6)
+			//				{
+			//					system("cls");
+			//					cout << "Введите дату с левыми нулями, пожалуйста! \nНапример, так: 010700" << endl; //ошибка
+			//				}
+			//				else i = 0;
+			//			}
+			//			break;
+			//		default:
+			//			qWhen = 17; //Временное
+			//			break;
+			//		}
+			//	}
 		}
 	}
 	
@@ -299,66 +357,6 @@ int main()
 	int lastChosenGadget = winGadget(A, chosenGadget, chosenGadgetN);	
 	
 	//опрос даты и наработки:
-	int qWhen = 17;      //вопрос: Когда?
-	int aWhen = 0;		 //ответ:  Когда?
-	string aWhenString;  //ответ: Когда?
-	int monthSize[12]{ 31,28,31,30,31,30,31,31,30,31,30,31 }; //дни в месяцах
-	int tempDay; //временная переменная дня
-	while (qWhen == 17)
-	{
-		cout << "Когда сделано ТО?" << endl;
-		//cout << "0 - Назад" << endl;
-		cout << "1 - Сегодня" << endl;
-		cout << "2 - Вчера" << endl;
-		cout << "3 - Ввести дату" << endl;
-		//cout << "4 - Позавчера" << endl; //можно поделать если станет скучно
-		cin >> qWhen;
-		switch (qWhen)
-		{
-		case 0:
-			qWhen = 17; //Временное
-			break;
-		case 1:
-			//запоминаем дату в формате ДДММГГ:
-			aWhenString = dateToSixNumbers(t.wDay, t.wMonth, t.wYear);
-			cout << aWhenString << endl;
-			break;
-		case 2:
-			if (t.wDay == 1)
-			{
-				if (t.wMonth == 1) aWhenString = to_string(31) + to_string(12) + to_string(t.wYear - 2001);
-				else
-				{
-					if ((monthSize[t.wMonth - 1] == 1) && ((t.wYear - 2000) % 4 == 0)) tempDay = 29; //если високосный
-					else tempDay = monthSize[t.wMonth - 1];
-					aWhenString = dateToSixNumbers(tempDay, t.wMonth - 1, t.wYear);
-				}
-			}
-			else aWhenString = dateToSixNumbers(t.wDay - 1, t.wMonth, t.wYear);
-			break;			
-		case 3:
-			i = 1;
-			system("cls");
-			while (i == 1)
-			{
-				cout << "Дата Тех. обслуживания(ДДММГГ):" << endl;
-				cin >> aWhenString;
-				if (aWhenString.length() != 6)
-				{
-					system("cls");
-					cout << "Введите дату с левыми нулями, пожалуйста! \nНапример, так: 010700" << endl; //ошибка
-				}
-				else i = 0;
-			}
-			break;
-		case 4:
-			qWhen = 17; //Временное
-			break;
-		default:
-			qWhen = 17; //Временное
-			break;
-		}
-	}
 
 	//ввод ТО:
 	unsigned long int aHowMuch;	//ответ: Какая наработка?
